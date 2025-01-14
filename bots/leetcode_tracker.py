@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 TOKEN = os.getenv("LEETCODE_BOT_TOKEN")
-CHANNEL_ID = int(os.getenv("LEETCODE_CHANNEL_ID"))
+CHANNEL_ID = os.getenv("LEETCODE_CHANNEL_ID")
 
 client = discord.Client(intents=discord.Intents.default())
 scheduler = AsyncIOScheduler()
