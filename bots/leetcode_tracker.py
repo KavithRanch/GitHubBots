@@ -54,7 +54,7 @@ async def post_daily_problem():
 
     logger.info("Preparing to post the daily problem...")
     # Setting channel and message to send
-    channel = client.get_channel(CHANNEL_ID)
+    channel = client.get_channel(int(CHANNEL_ID))
     message = fetch_daily_problem()
     await channel.send(message)
     logger.info("Successfully posted the daily problem to Discord.")
