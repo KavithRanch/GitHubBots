@@ -9,6 +9,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 TOKEN = os.getenv("LEETCODE_BOT_TOKEN")
+if not TOKEN:
+    print("ERROR: LEETCODE_BOT_TOKEN is not set or is invalid.")
+else:
+    print(f"Token successfully loaded: {TOKEN[:5]}...")
 CHANNEL_ID = os.getenv("LEETCODE_CHANNEL_ID")
 
 client = discord.Client(intents=discord.Intents.default())
