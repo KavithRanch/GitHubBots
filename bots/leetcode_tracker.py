@@ -69,7 +69,7 @@ def setup_bot():
     logger.info("Setting up the LeetCode tracker bot...")
 
     # Schedule message for 5AM
-    @scheduler.scheduled_job('cron', minute='*')
+    @scheduler.scheduled_job('cron', hour='5',minute='0')
     async def scheduled_task():
         logger.info("Scheduled task triggered: Fetching and posting daily problem...")
         await post_daily_problem()
