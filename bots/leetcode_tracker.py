@@ -33,20 +33,22 @@ def fetch_daily_problem():
                 date
                 question {
                   title
+                  difficulty
                 }
               }
             }
             """
     }
     post_response = requests.post(url, json=query)
-
+    print(post_response.text)
     if post_response.ok:
         res_json = post_response.json()
         daily_challenge = res_json['data']['activeDailyCodingChallengeQuestion']
         problem_name = daily_challenge['question']['title']
+        problem_dif= daily_challenge['question']['difficulty']
         problem_date = datetime.strptime(daily_challenge['date'], "%Y-%m-%d").strftime("%b %d, %Y")
         logger.info(f"Successfully fetched daily problem: {problem_name}")
-        return f"**---------- {problem_name} | {problem_date} ----------**"
+        return f"**---------- ({str.upper(problem_dif)}) {problem_name} | {problem_date} ----------**"
 
 
 # "async" since Discord API operations must be asynchronous
@@ -73,7 +75,7 @@ def setup_bot():
     logger.info("Setting up the LeetCode tracker bot...")
 
     # Schedule message for 5AM
-    @scheduler.scheduled_job('cron', hour='5', minute='0')
+    @scheduler.scheduled_job('cron', minute='*')
     async def scheduled_task():
         logger.info("Scheduled task triggered: Fetching and posting daily problem...")
         await post_daily_problem()
@@ -88,3 +90,4 @@ def setup_bot():
 
     return client, TOKEN
 
+print(fetch_daily_problem())
