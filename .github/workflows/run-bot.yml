@@ -24,4 +24,4 @@ jobs:
         env:
           LEETCODE_BOT_TOKEN: ${{ secrets.LEETCODE_BOT_TOKEN }}
           LEETCODE_CHANNEL_ID: ${{ secrets.LEETCODE_CHANNEL_ID }}
-        run: python bots/leetcode_tracker.py
+        run: python bot_manager.py

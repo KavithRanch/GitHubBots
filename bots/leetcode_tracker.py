@@ -88,5 +88,3 @@ def setup_bot():
         scheduler.start()
 
     return client, TOKEN
-
-print(fetch_daily_problem())
