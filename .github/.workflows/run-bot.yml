@@ -1,0 +1,27 @@
+name: Run LeetCode Bot Daily
+
+on:
+  schedule:
+    - cron: "0 1 * * *"  # Runs at 1 AM UTC (8 PM EST)
+  workflow_dispatch:  # Allows manual runs
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run bot
+        env:
+          LEETCODE_BOT_TOKEN: ${{ secrets.LEETCODE_BOT_TOKEN }}
+          LEETCODE_CHANNEL_ID: ${{ secrets.LEETCODE_CHANNEL_ID }}
+        run: python bots/leetcode_tracker.py

@@ -1,9 +1,7 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime
 import requests, os, discord
-from dotenv import load_dotenv
 import logging
-load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -64,6 +62,7 @@ async def post_daily_problem():
     message = fetch_daily_problem()
     await channel.send(message)
     logger.info("Successfully posted the daily problem to Discord.")
+    await client.close()
 
 
 def setup_bot():
